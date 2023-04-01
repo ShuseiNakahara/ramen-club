@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('ramens', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->string('restaurant');
+            $table->string('branch')->nullable();
             $table->timestamps();
         });
     }
