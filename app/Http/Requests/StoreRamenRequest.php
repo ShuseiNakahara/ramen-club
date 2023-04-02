@@ -11,7 +11,7 @@ class StoreRamenRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StoreRamenRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'media'      => 'required|file|image|max:512',
+            'restaurant' => 'required|string|max:255',
+            'branch'     => 'nullable|string|max:255',
         ];
     }
 }

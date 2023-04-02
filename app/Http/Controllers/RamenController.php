@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRamenRequest;
 use App\Http\Requests\UpdateRamenRequest;
 use App\Models\Ramen;
+use Illuminate\Http\RedirectResponse;
 
 class RamenController extends Controller
 {
@@ -13,7 +14,7 @@ class RamenController extends Controller
      */
     public function index()
     {
-        //
+        return view('ramens.index');
     }
 
     /**
@@ -21,15 +22,20 @@ class RamenController extends Controller
      */
     public function create()
     {
-        //
+        return view('ramens.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreRamenRequest $request)
+    public function store(StoreRamenRequest $request): RedirectResponse
     {
-        //
+        $validated = $request->validated();
+
+        $ramen = $request->user()->ramens()->create($validated);
+        $ramen->addMediaFromRequest('media')->toMediaCollection('media');
+
+        return redirect(route('ramens.index'));
     }
 
     /**
