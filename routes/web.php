@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('ramens', RamenController::class)
-    ->only(['index', 'create', 'store'])
+    ->except(['show', 'edit', 'update'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

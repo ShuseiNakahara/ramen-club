@@ -45,7 +45,7 @@ class RamenPolicy
      */
     public function delete(User $user, Ramen $ramen): bool
     {
-        //
+        return $ramen->user()->is($user);
     }
 
     /**
