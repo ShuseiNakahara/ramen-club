@@ -15,7 +15,7 @@ class RamenController extends Controller
     public function index()
     {
         // TODO: ページネーション
-        $ramens = Ramen::latest()->get();
+        $ramens = Ramen::with('user')->latest()->get();
         
         return view('ramens.index', compact('ramens'));
     }
@@ -68,8 +68,12 @@ class RamenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Ramen $ramen)
+    public function destroy(Ramen $ramen): RedirectResponse
     {
-        //
+        $this->authorize('delete', $ramen);
+
+        $ramen->delete();
+
+        return redirect(route('ramens.index'));
     }
 }
