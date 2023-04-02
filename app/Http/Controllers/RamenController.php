@@ -14,7 +14,10 @@ class RamenController extends Controller
      */
     public function index()
     {
-        return view('ramens.index');
+        // TODO: ページネーション
+        $ramens = Ramen::latest()->get();
+        
+        return view('ramens.index', compact('ramens'));
     }
 
     /**

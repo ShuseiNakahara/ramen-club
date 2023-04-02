@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    ラーメンの画像がここに表示されます
-                </div>
-            </div>
-        </div>
-    </div>
+    <a href="{{ route('ramens.create') }}">{{ __('Post') }}</a>
+    <ul>
+        @foreach ($ramens as $ramen)
+            <li>
+                <img src="{{ $ramen->getFirstMediaUrl('media') }}" alt="{{ __('Ramen Image') }}">
+                <p>{{ $ramen->restaurant }}</p>
+            </li>
+        @endforeach
+    </ul>
 </x-app-layout>
